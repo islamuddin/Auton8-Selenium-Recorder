@@ -1,0 +1,49 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "name": "Auton8 Without Double Window Recording",
+  "description": "Records your actions in browser and writes a selenium script. You don't have to worry about html tags or deal in element inspection",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background":{
+    "service_worker": "bg-loader.js"
+  },
+  "permissions": [
+    "webNavigation",
+    "storage",
+    "tabs",
+	"clipboardWrite",
+    "notifications",
+	"contextMenus",
+  "activeTab","tabs", "<all_urls>", "notifications","contextMenus","storage","clipboardRead","clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
+    "https://accounts.google.com/",
+    "http://*/*",
+    "https://*/*",
+    "http://*/",
+    "https://*/",
+    "*://*/*",
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+	"default_icon":"images/logo-48.png"
+  },
+  "icons": {
+    "16": "/images/logo-48.png",
+    "32": "/images/logo-48.png",
+    "48": "/images/logo-48.png",
+    "128": "/images/logo-48.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://apis.google.com https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js;"
+},
+"content_scripts":[{
+      "matches": ["https://*/*"],
+      "run_at": "document_start",
+      "js": ["js/jquery.js","aws.js","s3upload.js","content.js"],
+	  "all_frames": true
+    }]
+}
